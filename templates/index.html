@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intent Analysis App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>💬 Intent Analysis on Amazon products</h1>
+
+    <!-- ===== Review Form ===== -->
+    <form action="/predict" method="POST">
+        <textarea name="review" placeholder="Enter your review here..." required></textarea>
+        <br>
+        <button type="submit">🔍 Predict</button>
+    </form>
+
+    <!-- ===== Prediction Result ===== -->
+    {% if result %}
+        <div class="result">
+            <p><strong>Review:</strong> {{ review }}</p>
+            <p><strong>Prediction:</strong> {{ result }}</p>
+        </div>
+    {% endif %}
+
+    <!-- ===== Feedback Section ===== -->
+    <div class="feedback">
+        <h3>💡 Share Your Feedback</h3>
+        <form action="#" onsubmit="showThanks(event)">
+            <input type="text" id="feedbackInput" placeholder="Your feedback..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        function showThanks(event) {
+            event.preventDefault();
+            const input = document.getElementById('feedbackInput');
+            if (input.value.trim() !== "") {
+                alert("✅ Thanks for your feedback!");
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
